@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS funcionario (
+    IdPessoa SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sexo VARCHAR(1) NOT NULL,
+    dataNascimento DATE NOT NULL,
+    whatsapp VARCHAR(16) NULL,
+    telefone VARCHAR(16) NULL,
+    rg VARCHAR(45) NULL,
+    orgaoExpedidor VARCHAR(10) NULL,
+    dataExpedicao DATE NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    nomeMae VARCHAR(255) NULL,
+    naturalidade VARCHAR(100) NULL,
+    matricula VARCHAR(8) NULL,
+    escolaridade VARCHAR(45) NULL,
+    cargo VARCHAR(45) NULL,
+    funcao VARCHAR(45) NULL,
+    vinculo VARCHAR(45) NULL,
+    empresa VARCHAR(45) NULL,
+    dataAdmissao DATE NULL,
+    cargaHoraria INT NULL,
+    idEndereco INT REFERENCES endereco(idEndereco) ON DELETE CASCADE ON UPDATE CASCADE
+);
