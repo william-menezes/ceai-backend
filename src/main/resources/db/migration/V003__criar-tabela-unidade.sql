@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS unidade (
+    idUnidade SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(16) NOT NULL,
+    idEndereco INT NOT NULL REFERENCES endereco (idEndereco) ON DELETE CASCADE ON UPDATE CASCADE,
+    idFuncionario INT REFERENCES funcionario (idFuncionario) ON DELETE SET NULL ON UPDATE CASCADE
+)
