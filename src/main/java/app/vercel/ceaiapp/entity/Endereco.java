@@ -14,7 +14,8 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "endereco_id")
+    //@Column(name = "endereco_id")
+    @Column(name = "id_endereco")
     private Long id;
 
     @NotBlank(message = "Campo obrigatório")
