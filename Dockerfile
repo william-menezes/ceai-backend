@@ -11,6 +11,6 @@ FROM openjdk:17-slim
 
 EXPOSE 8080
 
-COPY --from=build target/ceai-app-0.0.1-SNAPSHOT.jar /app/ceai-app.jar
+COPY --from=build /target/ceai-app-0.0.1-SNAPSHOT.jar ceai-app.jar
 
-ENTRYPOINT ["java", "-jar", "/app/ceai-app.jar"]
+ENTRYPOINT ["java", "-jar", "ceai-app.jar"]
