@@ -24,6 +24,7 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoService.findAll());
     }
 
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<Endereco> findById(@PathVariable Long id) {
         Endereco endereco = enderecoService.findById(id);
