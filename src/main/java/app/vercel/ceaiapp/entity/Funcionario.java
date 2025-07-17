@@ -75,4 +75,27 @@ public class Funcionario {
         this.dataAdmissao = funcionarioDTO.getDataAdmissao();
         this.cargaHoraria = funcionarioDTO.getCargaHoraria();
     }
+
+    public void funcionarioDtoToFuncionario(FuncionarioDTO funcionarioDTO) {
+        this.pessoa.setNome(funcionarioDTO.getNome());
+        this.pessoa.setSexo(funcionarioDTO.getSexo());
+        this.pessoa.setDataNascimento(funcionarioDTO.getDataNascimento());
+        this.pessoa.setWhatsapp(funcionarioDTO.getWhatsapp());
+        this.pessoa.setTelefone(funcionarioDTO.getTelefone());
+        this.pessoa.setRg(funcionarioDTO.getRg());
+        this.pessoa.setOrgaoExpedidor(funcionarioDTO.getOrgaoExpedidor());
+        this.pessoa.setDataExpedicao(funcionarioDTO.getDataExpedicao());
+        this.pessoa.setCpf(funcionarioDTO.getCpf());
+        this.pessoa.setMae(funcionarioDTO.getMae());
+        this.pessoa.setNaturalidade(funcionarioDTO.getNaturalidade());
+        this.pessoa.setEndereco(funcionarioDTO.getEndereco());
+        this.matricula = funcionarioDTO.getMatricula();
+        this.escolaridade = funcionarioDTO.getEscolaridade();
+        this.cargo = funcionarioDTO.getCargo();
+        this.funcao = funcionarioDTO.getFuncao();
+        this.vinculo = funcionarioDTO.getVinculo();
+        this.empresa = funcionarioDTO.getEmpresa();
+        this.dataAdmissao = funcionarioDTO.getDataAdmissao();
+        this.cargaHoraria = funcionarioDTO.getCargaHoraria();
+    }
 }
