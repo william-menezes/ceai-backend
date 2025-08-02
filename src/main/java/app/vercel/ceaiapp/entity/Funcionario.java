@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Data
@@ -38,7 +39,6 @@ public class Funcionario {
 
     @Column(name = "data_admissao")
     @JsonFormat(pattern = "dd/MMM/yyyy", shape = JsonFormat.Shape.STRING)
-
     private LocalDate dataAdmissao;
 
     @Column(name = "carga_horaria")
@@ -46,11 +46,11 @@ public class Funcionario {
 
     @CreationTimestamp
     @Column(name = "data_criacao", nullable = false, columnDefinition = "datetime")
-    private LocalDate dataCriacao;
+    private Instant dataCriacao;
 
     @CreationTimestamp
     @Column(name = "data_atualizacao", nullable = false, columnDefinition = "datetime")
-    private LocalDate dataAtualizacao;
+    private Instant dataAtualizacao;
 
     public Funcionario(FuncionarioDTO funcionarioDTO) {
         this.pessoa = new Pessoa();

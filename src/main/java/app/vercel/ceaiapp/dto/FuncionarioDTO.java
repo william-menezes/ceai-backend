@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Getter
@@ -19,36 +20,35 @@ import java.time.LocalDate;
 public class FuncionarioDTO {
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Campo obrigatório")
     @Size(max = 255)
     private String nome;
 
-    @NotNull
+    @NotNull(message = "Campo obrigatório")
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    @NotNull
-    @Past
+    @NotNull(message = "Campo obrigatório")
+    @Past(message = "Data igual ou posterior a data atual")
     private LocalDate dataNascimento;
 
-    @Size(max = 16)
+    @Size(max = 16, message = "O número de telefone deve ter no máximo 16 caracteres")
     private String whatsapp;
 
-    @Size(max = 16)
+    @Size(max = 16, message = "O número de telefone deve ter no máximo 16 caracteres")
     private String telefone;
     private Endereco endereco;
 
-    @Size(max = 45)
+    @Size(max = 45, message = "O número do RG deve ter no máximo 45 caracteres")
     private String rg;
 
-    @Size(max = 10)
+    @Size(max = 10, message = "O órgão expedidor deve ter no máximo 10 caracteres")
     private String orgaoExpedidor;
 
-    @PastOrPresent
-    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+    @PastOrPresent(message = "A data de expedição deve ser igual ou anterior à data atual")
     private LocalDate dataExpedicao;
 
-    @NotBlank
+    @NotBlank(message = "Campo obrigatório")
     @Size(max = 14)
     private String cpf;
 
@@ -83,9 +83,9 @@ public class FuncionarioDTO {
     private int cargaHoraria;
 
 
-    private LocalDate dataCriacao;
+    private Instant dataCriacao;
 
-    private LocalDate dataAtualizacao;
+    private Instant dataAtualizacao;
 
     public FuncionarioDTO(Funcionario funcionario) {
         this.id = funcionario.getId();
@@ -109,6 +109,8 @@ public class FuncionarioDTO {
         this.empresa = funcionario.getEmpresa();
         this.dataAdmissao = funcionario.getDataAdmissao();
         this.cargaHoraria = funcionario.getCargaHoraria();
+        this.dataCriacao = funcionario.getDataCriacao();
+        this.dataAtualizacao = funcionario.getDataAtualizacao();
     }
 
     public void setEndereco(Long id) {
