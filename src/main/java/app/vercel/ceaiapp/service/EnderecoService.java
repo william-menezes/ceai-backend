@@ -2,15 +2,16 @@ package app.vercel.ceaiapp.service;
 
 import app.vercel.ceaiapp.dto.EnderecoDTO;
 import app.vercel.ceaiapp.entity.Endereco;
+import app.vercel.ceaiapp.mapstruct.EnderecoMapper;
 import app.vercel.ceaiapp.repository.EnderecoRepository;
 import app.vercel.ceaiapp.service.exception.DatabaseException;
 import app.vercel.ceaiapp.service.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -21,26 +22,34 @@ public class EnderecoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private EnderecoMapper enderecoMapper;
+
     @Transactional(readOnly = true)
-    public List<Endereco> findAll() {
-        return enderecoRepository.findAll();
+    public List<EnderecoDTO> findAll() {
+        return enderecoMapper.listaEnderecoParaListaEnderecoDTO(
+                enderecoRepository.findAll()
+        );
     }
 
     @Transactional(readOnly = true)
-    public Endereco findById(Long id) {
-        return enderecoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado"));
+    public EnderecoDTO findById(Long id) {
+        return enderecoMapper.endercoParaEnderecoDTO(
+                enderecoRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Endereço não encontrado")));
     }
 
     @Transactional
-    public Endereco save(Endereco e) {
-        return enderecoRepository.save(e);
+    public EnderecoDTO save(EnderecoDTO e) {
+        return enderecoMapper.endercoParaEnderecoDTO(
+                enderecoRepository.save(
+                        enderecoMapper.enderecoDTOParaEndereco(e)));
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
 
-        if(!enderecoRepository.existsById(id)) {
+        if (!enderecoRepository.existsById(id)) {
             throw new ResourceNotFoundException("Endereco não encontrado");
         }
 
@@ -54,12 +63,12 @@ public class EnderecoService {
     }
 
     @Transactional
-    public Endereco update(Long id, EnderecoDTO endereco) {
+    public EnderecoDTO update(Long id, EnderecoDTO endereco) {
         try {
             Endereco e = enderecoRepository.getReferenceById(id);
             copyData(endereco, e);
             e = enderecoRepository.save(e);
-            return e;
+            return enderecoMapper.endercoParaEnderecoDTO(e);
 
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Endereco não encontrado");

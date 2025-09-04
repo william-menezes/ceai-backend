@@ -2,6 +2,7 @@ package app.vercel.ceaiapp.controller;
 
 import app.vercel.ceaiapp.dto.EnderecoDTO;
 import app.vercel.ceaiapp.entity.Endereco;
+import app.vercel.ceaiapp.mapstruct.EnderecoMapper;
 import app.vercel.ceaiapp.service.EnderecoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,36 +14,38 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/endereco")
+@RequestMapping(path = "/enderecos")
 public class EnderecoController {
 
     @Autowired
     public EnderecoService enderecoService;
 
+    @Autowired
+    public EnderecoMapper enderecoMapper;
+
     @GetMapping
-    public ResponseEntity<List<Endereco>> findAll() {
+    public ResponseEntity<List<EnderecoDTO>> findAll() {
         return ResponseEntity.ok(enderecoService.findAll());
     }
 
-
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Endereco> findById(@PathVariable Long id) {
-        Endereco endereco = enderecoService.findById(id);
-
+    public ResponseEntity<EnderecoDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(enderecoService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Endereco> save(@RequestBody @Valid Endereco endereco, UriComponentsBuilder uriBuilder) {
-        Endereco e = enderecoService.save(endereco);
+    public ResponseEntity<EnderecoDTO> save(@RequestBody @Valid EnderecoDTO endereco/*, UriComponentsBuilder uriBuilder*/) {
+        /*Endereco e = enderecoMapper.enderecoDTOParaEndereco(enderecoService.save(endereco));
 
-        URI uri = uriBuilder.path("endereco/{id}").buildAndExpand(e.getId()).toUri();
+        URI uri = uriBuilder.path("enderecos/{id}").buildAndExpand(e.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(e);
+        return ResponseEntity.created(uri).body(
+                enderecoMapper.endercoParaEnderecoDTO(e));*/
+        return ResponseEntity.ok(enderecoService.save(endereco));
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Endereco> update(@PathVariable Long id, @RequestBody @Valid EnderecoDTO endereco) {
+    public ResponseEntity<EnderecoDTO> update(@PathVariable Long id, @RequestBody @Valid EnderecoDTO endereco) {
         return ResponseEntity.ok(enderecoService.update(id, endereco));
     }
 
