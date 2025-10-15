@@ -12,6 +12,8 @@ import java.time.LocalDate;
 
 public record FuncionarioDTO(
 
+        Long id,
+
         @NotBlank(message = "Campo obrigatório")
         @Size(max = 255)
         String nome,

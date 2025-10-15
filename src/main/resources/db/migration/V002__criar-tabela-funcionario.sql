@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS funcionario (
     empresa VARCHAR(45) NULL,
     data_admissao DATE NULL,
     carga_horaria INT NULL,
-    data_criacao DATE NOT NULL,
-    data_atualizacao DATE NOT NULL,
-    id_endereco INT REFERENCES endereco(id_endereco) ON DELETE CASCADE ON UPDATE CASCADE
+    data_criacao TIMESTAMP NOT NULL,
+    data_atualizacao TIMESTAMP NOT NULL,
+    id_endereco INT REFERENCES endereco(id_endereco) ON DELETE SET NULL ON UPDATE CASCADE
 )

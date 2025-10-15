@@ -1,7 +1,6 @@
 package app.vercel.ceaiapp.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDate;
 

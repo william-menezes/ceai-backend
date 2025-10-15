@@ -28,7 +28,6 @@ public class Funcionario {
     private String empresa;
 
     @Column(name = "data_admissao")
-    @JsonFormat(pattern = "dd/MMM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate dataAdmissao;
 
     @Column(name = "carga_horaria")
